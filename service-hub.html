@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMC Important Service</title>
+  <style>
+    :root {
+      --primary: #17335c;
+      --accent: #f0a500;
+      --bg: #f4f7fb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --danger: #b45309;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #eef3fb 0%, #f9fbff 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(23, 51, 92, 0.12);
+      padding: 32px;
+    }
+
+    .topline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #e8eef8;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--primary);
+    }
+
+    p {
+      line-height: 1.7;
+      color: var(--text);
+      margin: 0 0 18px;
+    }
+
+    .status {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #fff7e6;
+      color: var(--danger);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(23, 51, 92, 0.15);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #eef2f7;
+      color: var(--primary);
+    }
+
+    .alt-box {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 14px;
+    }
+
+    .alt-box h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .alt-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .alt-box li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .alt-box a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="topline">AMC Important Link Service</div>
+    <h1 id="serviceTitle">Loading…</h1>
+    <div class="status" id="serviceStatus">Checking link details…</div>
+    <p id="serviceDescription">Please wait while the service information is being loaded.</p>
+
+    <div class="actions" id="serviceActions"></div>
+
+    <section class="alt-box" id="alternativesBox" hidden>
+      <h2>Helpful alternatives</h2>
+      <ul id="alternativesList"></ul>
+    </section>
+
+    <p class="muted">This page was added to replace broken local HTML links with a backend-powered routing flow.</p>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+    const missing = params.get('missing');
+
+    const titleEl = document.getElementById('serviceTitle');
+    const statusEl = document.getElementById('serviceStatus');
+    const descEl = document.getElementById('serviceDescription');
+    const actionsEl = document.getElementById('serviceActions');
+    const alternativesBox = document.getElementById('alternativesBox');
+    const alternativesList = document.getElementById('alternativesList');
+
+    if (missing || !slug) {
+      titleEl.textContent = 'Service not found';
+      statusEl.textContent = 'Unavailable';
+      descEl.textContent = 'The requested important link could not be matched. Please return to the homepage and try again.';
+      actionsEl.innerHTML = '<a class="btn btn-secondary" href="/index.html">Back to homepage</a>';
+    } else {
+      fetch(`/api/important-links/${encodeURIComponent(slug)}`)
+        .then((response) => {
+          if (!response.ok) throw new Error('Service not found');
+          return response.json();
+        })
+        .then((service) => {
+          titleEl.textContent = service.title;
+          statusEl.textContent = service.status === 'active' ? 'Ready to open' : 'Manual follow-up may be needed';
+          descEl.textContent = service.description;
+
+          const buttons = [];
+          if (service.officialUrl) {
+            buttons.push(`<a class="btn btn-primary" href="${service.officialUrl}" target="_blank" rel="noopener noreferrer">Open official page</a>`);
+          }
+          buttons.push('<a class="btn btn-secondary" href="/index.html">Back to homepage</a>');
+          actionsEl.innerHTML = buttons.join('');
+
+          if (Array.isArray(service.alternatives) && service.alternatives.length > 0) {
+            alternativesBox.hidden = false;
+            alternativesList.innerHTML = service.alternatives
+              .map((item) => `<li><a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.label}</a></li>`)
+              .join('');
+          }
+        })
+        .catch(() => {
+          titleEl.textContent = 'Service not found';
+          statusEl.textContent = 'Unavailable';
+          descEl.textContent = 'The requested service could not be loaded.';
+          actionsEl.innerHTML = '<a class="btn btn-secondary" href="/index.html">Back to homepage</a>';
+        });
+    }
+  </script>
+</body>
+</html>
