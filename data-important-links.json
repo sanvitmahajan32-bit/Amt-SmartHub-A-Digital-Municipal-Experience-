@@ -1,0 +1,134 @@
+[
+  {
+    "slug": "birth-death-certificates",
+    "title": "Birth/Death Certificates",
+    "status": "active",
+    "description": "Certificate-related citizen services on the District Amravati official portal.",
+    "officialUrl": "https://amravati.gov.in/en/service-category/certificates/",
+    "alternatives": []
+  },
+  {
+    "slug": "property-tax",
+    "title": "Property Tax",
+    "status": "active",
+    "description": "Official property tax portal for Amravati Municipal Corporation.",
+    "officialUrl": "https://propertytax.amravaticorporation.in/",
+    "alternatives": []
+  },
+  {
+    "slug": "water-dept",
+    "title": "Water Department",
+    "status": "active",
+    "description": "Maharashtra Jeevan Pradhikaran water management system for water-related services.",
+    "officialUrl": "https://mjp.maharashtra.gov.in/water-management-system/",
+    "alternatives": []
+  },
+  {
+    "slug": "recruitment",
+    "title": "Recruitment",
+    "status": "active",
+    "description": "Official recruitment notices for District Amravati.",
+    "officialUrl": "https://amravati.gov.in/en/notice_category/recruitment/",
+    "alternatives": []
+  },
+  {
+    "slug": "dog-license",
+    "title": "Dog License",
+    "status": "limited",
+    "description": "A dedicated verified dog or pet licence page could not be confirmed from the supplied project sources. This card now opens a working service page with official fallback references instead of a broken link.",
+    "officialUrl": "",
+    "alternatives": [
+      {
+        "label": "Municipal Corporation, Amravati (district portal)",
+        "url": "https://amravati.gov.in/en/public-utility/municipal-corporation-amravati/"
+      },
+      {
+        "label": "Announcements",
+        "url": "https://amravati.gov.in/en/notice_category/announcements/"
+      }
+    ]
+  },
+  {
+    "slug": "tenders",
+    "title": "Tenders",
+    "status": "active",
+    "description": "Official tender notices for District Amravati.",
+    "officialUrl": "https://amravati.gov.in/en/notice_category/tenders/",
+    "alternatives": []
+  },
+  {
+    "slug": "rti-application",
+    "title": "RTI Application",
+    "status": "active",
+    "description": "Right to Information resources on the District Amravati official portal.",
+    "officialUrl": "https://amravati.gov.in/en/rti/",
+    "alternatives": []
+  },
+  {
+    "slug": "cc-road",
+    "title": "CC Road Work Progress",
+    "status": "limited",
+    "description": "A dedicated verified CC road progress page was not confirmed from the supplied sources. This card now opens a working landing page with official announcement links.",
+    "officialUrl": "",
+    "alternatives": [
+      {
+        "label": "Announcements",
+        "url": "https://amravati.gov.in/en/notice_category/announcements/"
+      },
+      {
+        "label": "Municipal Corporation, Amravati (district portal)",
+        "url": "https://amravati.gov.in/en/public-utility/municipal-corporation-amravati/"
+      }
+    ]
+  },
+  {
+    "slug": "press-release",
+    "title": "Press Release",
+    "status": "active",
+    "description": "Official Amravati municipal news and press update portal.",
+    "officialUrl": "https://news.amravaticorporation.in/",
+    "alternatives": []
+  },
+  {
+    "slug": "health-license",
+    "title": "Health License",
+    "status": "limited",
+    "description": "A direct verified health licence URL could not be confirmed from the supplied sources. This card now opens a working service page with official fallback references.",
+    "officialUrl": "",
+    "alternatives": [
+      {
+        "label": "Municipal Corporation, Amravati (district portal)",
+        "url": "https://amravati.gov.in/en/public-utility/municipal-corporation-amravati/"
+      },
+      {
+        "label": "Announcements",
+        "url": "https://amravati.gov.in/en/notice_category/announcements/"
+      }
+    ]
+  },
+  {
+    "slug": "building-id",
+    "title": "Building ID",
+    "status": "limited",
+    "description": "A direct verified building ID page could not be confirmed from the supplied sources. This card now opens a working landing page with official municipal references instead of a broken page.",
+    "officialUrl": "",
+    "alternatives": [
+      {
+        "label": "Municipal Corporation, Amravati (district portal)",
+        "url": "https://amravati.gov.in/en/public-utility/municipal-corporation-amravati/"
+      },
+      {
+        "label": "Announcements",
+        "url": "https://amravati.gov.in/en/notice_category/announcements/"
+      }
+    ]
+  },
+  {
+    "slug": "participate",
+    "title": "Participate Amravati",
+    "status": "active",
+    "description": "Citizen participation and feedback form already referenced in the website.",
+    "officialUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfDS5tUdW9wTy5NhDCGMJITRzLGHFDGxIdpzJOGSpSMW9175g/viewform",
+    "alternatives": []
+  }
+]
