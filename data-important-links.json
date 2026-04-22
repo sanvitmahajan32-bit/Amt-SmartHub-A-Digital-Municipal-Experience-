@@ -5,7 +5,7 @@
     "status": "active",
     "description": "Certificate-related citizen services on the District Amravati official portal.",
     "officialUrl": "https://amravati.gov.in/en/service-category/certificates/",
-    "alternatives": []
+    "alternatives": "<button onclick="https://amravati.gov.in/en/service-category/certificates"
   },
   {
     "slug": "property-tax",
