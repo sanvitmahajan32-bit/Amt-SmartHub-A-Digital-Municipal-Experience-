@@ -1,94 +1,202 @@
-# Complaint System
+# AMC Website - Amravati Municipal Corporation Portal
 
-This folder contains a React-based complaint filing system for the Amravati Municipal Corporation website.
+A web application for managing citizen complaints and municipal services for the Amravati Municipal Corporation (AMC).
 
 ## Features
 
-- **Interactive Form**: Built with React for a modern, responsive user experience
-- **Form Validation**: Client-side validation with error messages
-- **Multiple Categories**: Support for various complaint types (Road Maintenance, Water Supply, etc.)
-- **Priority Levels**: Low, Medium, High, and Urgent priority options
-- **Image Upload**: Drag & drop or browse to upload up to 5 images (JPG, PNG, GIF, max 5MB each)
-- **Location Detection**: Auto-detect current location using GPS or manual entry
-- **Success Feedback**: Confirmation message with reference number after submission
+- **Complaint Management System**: Citizens can file complaints with real-time geolocation detection
+- **Complaint Tracking**: View status of submitted complaints (Pending, In Progress, Resolved)
+- **Admin Dashboard**: Admin interface to manage and update complaint statuses
+- **Service Hub**: Access to important municipal links and services
 - **Responsive Design**: Works on desktop and mobile devices
 
-## New Features Added
+## Project Structure
 
-### 🖼️ Image Upload
-- **Drag & Drop**: Users can drag images directly onto the upload area
-- **File Browser**: Click to browse and select multiple files
-- **Image Preview**: See thumbnails of uploaded images before submission
-- **Validation**: Only accepts JPG, PNG, GIF files under 5MB each
-- **Limit**: Maximum 5 images per complaint
-- **Remove Images**: Easy removal of selected images
+```
+AMC-Website-fixed/
+├── FRONTEND/
+│   ├── USER/
+│   │   ├── index.html              # Main home page
+│   │   ├── service-hub.html        # Municipal services listing
+│   │   ├── style.css               # Global styles
+│   │   ├── script.js               # Frontend logic
+│   │   ├── Complaint/              # Complaint filing interface
+│   │   │   ├── complaint.html
+│   │   │   ├── ComplaintForm.js    # React complaint form component
+│   │   │   └── ComplaintForm.css
+│   │   └── [images and assets]
+│   └── ADMIN/
+│       └── admin.html              # Admin login and dashboard
+├── BACKEND/
+│   └── USER/
+│       ├── server.js               # Node.js HTTP server
+│       └── data-important-links.json # Municipal services data
+├── package.json                    # Project dependencies
+└── README.md                        # This file
+```
 
-### 📍 Location Detection
-- **Auto-Detection**: One-click GPS location detection using browser geolocation API
-- **Reverse Geocoding**: Converts coordinates to readable addresses using OpenStreetMap
-- **Manual Entry**: Traditional text input for location
-- **Fallback**: Shows coordinates if address lookup fails
-- **Status Messages**: Real-time feedback during location detection
+## Installation
 
-## Files
+1. **Prerequisites**: Make sure you have Node.js installed (v14 or higher)
 
-- `complaint.html` - Main HTML file with embedded React application
-- `ComplaintForm.js` - React component (for reference, not used in current setup)
-- `ComplaintForm.css` - CSS styles (embedded in HTML for simplicity)
+2. **Clone the repository**:
+   ```bash
+   git clone <your-github-url>
+   cd AMC-Website-fixed
+   ```
 
-## Technical Implementation
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-- **React 18** loaded from CDN for component framework
-- **Babel Standalone** for JSX compilation in browser
-- **Geolocation API** for GPS location detection
-- **OpenStreetMap Nominatim** for reverse geocoding (free API)
-- **File API** for image handling and validation
-- **Drag & Drop API** for intuitive file uploads
-- **CSS-in-JS** styling embedded directly in the HTML
+## Running the Application
 
-## Usage
+### Start the server:
+```bash
+npm start
+```
 
-1. Access the complaint form via the "File a Complaint" link in the main website
-2. Fill out all required fields (* marked)
-3. Add images by dragging & dropping or browsing files
-4. Set location by typing manually or clicking "Auto Detect" for GPS
-5. Select appropriate category and priority
-6. Submit the form
-7. Receive confirmation with reference number
+The server will run at `http://localhost:3000`
+
+### Access the application:
+- **Home Page**: `http://localhost:3000`
+- **File a Complaint**: `http://localhost:3000/Complaint/complaint.html`
+- **Admin Dashboard**: `http://localhost:3000/admin.html`
+- **Service Hub**: `http://localhost:3000/service-hub.html`
+
+## How to Use
+
+### Filing a Complaint (Citizens)
+
+1. Navigate to "File a Complaint" section
+2. Click "Detect Location" to capture your current location
+3. Fill in complaint details (category, subject, description, priority)
+4. Submit the complaint
+5. Your complaint will be stored locally and assigned a reference number
+6. View your past complaints and their status in the same page
+
+### Admin Dashboard
+
+1. Access the admin dashboard at `/admin.html`
+2. Login with your credentials (default: admin / admin)
+3. View all submitted complaints in a table format
+4. Update complaint status (Pending → In Progress → Resolved)
+5. Changes are saved and reflected in the user's complaint history
+
+### Important Links Management
+
+Edit `BACKEND/USER/data-important-links.json` to manage municipal services:
+- Add new services
+- Update service URLs
+- Change service status (active/inactive)
+
+## Technologies Used
+
+- **Frontend**: HTML5, CSS3, JavaScript, React (React CDN build)
+- **Backend**: Node.js with built-in HTTP module
+- **Storage**: Browser LocalStorage (for demo purposes)
+- **Geolocation**: Browser Geolocation API with Nominatim reverse geocoding
+- **Server**: Node.js HTTP server for static file serving and API endpoints
+
+## API Endpoints
+
+- `GET /api/important-links` - Get all municipal services
+- `GET /api/important-links/:slug` - Get specific service details
+- `GET /go/:slug` - Redirect to service URL
+- `GET /` - Home page
+- `GET /admin.html` - Admin dashboard
+- `GET /Complaint/complaint.html` - Complaint form
+- `GET /service-hub.html` - Service hub page
+
+## Data Storage
+
+Currently, the application uses browser **LocalStorage** for storing complaints. This is suitable for demonstration purposes but should be replaced with a real database (MongoDB, PostgreSQL, etc.) for production use.
+
+### User Complaints Structure:
+```javascript
+{
+  id: timestamp,
+  category: "Road Maintenance",
+  subject: "Complaint title",
+  description: "Detailed complaint",
+  location: "City, District, State",
+  priority: "high/medium/low",
+  status: "Pending/In Progress/Resolved",
+  createdAt: ISO timestamp
+}
+```
+
+## Admin Credentials
+
+**Default Credentials**:
+- Username: `admin`
+- Password: `admin`
+
+⚠️ **Note**: Change these credentials before deploying to production!
 
 ## Browser Requirements
 
-- **Geolocation**: Modern browsers with GPS/location permission support
-- **File API**: Modern browsers for file upload functionality
-- **ES6 Support**: React 18 requires modern JavaScript features
-- **HTTPS**: Required for geolocation API in most browsers
+- Modern browser with:
+  - ES6 JavaScript support
+  - Geolocation API support
+  - LocalStorage support
+  - CORS support for Nominatim API
 
-## Privacy & Security
+## Deployment
 
-- **Location Data**: Only collected with explicit user permission
-- **Image Storage**: Images are processed client-side only (not stored)
-- **No Tracking**: No personal data stored without explicit submission
-- **HTTPS Required**: Secure connection needed for geolocation features
+### Environment Variables (Optional)
+You can set custom port via environment variable:
+```bash
+PORT=8000 npm start
+```
+
+### Production Deployment Steps
+
+1. Install Node.js on your server
+2. Clone the repository
+3. Run `npm install`
+4. Set up a reverse proxy (Nginx/Apache) to forward requests to Node.js
+5. Use a process manager (PM2) to keep the server running
+6. Consider adding HTTPS/SSL certificate
+7. Replace LocalStorage with a real database
+8. Implement proper authentication for admin panel
+
+### Using PM2 for Production
+
+```bash
+npm install -g pm2
+pm2 start BACKEND/USER/server.js --name "amc-server"
+pm2 startup
+pm2 save
+```
 
 ## Future Enhancements
 
-- Backend API integration for storing complaints and images
-- Image compression for faster uploads
-- Complaint tracking system with status updates
-- Admin dashboard for complaint management
-- Email/SMS notifications for complaint status
-- Offline support with service workers
-- Advanced image editing (crop, rotate)
+- [ ] User authentication and registration
+- [ ] Database integration (MongoDB/PostgreSQL)
+- [ ] Email notifications for complaint status updates
+- [ ] SMS notifications
+- [ ] Image upload for complaints
+- [ ] Admin user management
+- [ ] Real-time notification system
+- [ ] Mobile app
+- [ ] PDF report generation
+- [ ] Multi-language support
 
-## Development
+## License
 
-To modify the React component:
-1. Edit the JSX code in the `<script type="text/babel">` section
-2. Test changes by opening `complaint.html` in a browser
-3. For production, consider setting up a proper build system with Webpack
+This project is open source and available for municipal use.
 
-## Browser Support
+## Contributing
 
-- Modern browsers with ES6 support
-- React 18 requires modern browser features
-- Babel handles JSX compilation automatically
+Contributions are welcome! Please feel free to submit pull requests.
+
+## Support
+
+For issues or questions, please contact the development team.
+
+---
+
+**Last Updated**: April 2026  
+**Version**: 1.0.0
